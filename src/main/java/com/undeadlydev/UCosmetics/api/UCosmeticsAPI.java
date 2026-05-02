@@ -7,19 +7,28 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
- * API pública de UCosmetics.
- * Usar {@link #get()} para obtener la instancia registrada.
+ * Public API for UCosmetics. (1.0.1)
+ * <p>
+ * Use {@link #get()} to obtain the registered API instance.
+ * </p>
+ *
+ * <pre>
+ * Optional&lt;UCosmeticsAPI&gt; api = UCosmeticsAPI.get();
+ * api.ifPresent(ucosmetics -&gt; {
+ *     ucosmetics.giveCosmetic(player, CosmeticType.HAT, 1);
+ * });
+ * </pre>
  */
 public abstract class UCosmeticsAPI {
 
     private static UCosmeticsAPI instance;
 
     /**
-     * Obtiene la instancia de la API registrada por el plugin UCosmetics.
-     * @return Optional con la API si el plugin está activo, vacío si no.
+     * Gets the API instance registered by the UCosmetics plugin.
+     *
+     * @return Optional containing the API if the plugin is active, empty otherwise
      */
     public static Optional<UCosmeticsAPI> get() {
         if (instance == null) {
@@ -33,95 +42,109 @@ public abstract class UCosmeticsAPI {
     }
 
     /**
-     * Verifica si un jugador posee un cosmético específico.
-     * @param player Jugador
-     * @param type Tipo de cosmético
-     * @param id ID del cosmético
-     * @return true si lo posee
+     * Checks if a player owns a specific cosmetic.
+     *
+     * @param player the player to check
+     * @param type   the cosmetic type
+     * @param id     the cosmetic ID
+     * @return true if the player owns the cosmetic
      */
     public abstract boolean hasCosmetic(Player player, CosmeticType type, int id);
 
     /**
-     * Equipa un cosmético a un jugador.
-     * @param player Jugador
-     * @param type Tipo de cosmético
-     * @param id ID del cosmético
-     * @return true si se equipó correctamente
+     * Equips a cosmetic on a player. If the player already has a cosmetic of the
+     * same type equipped, it will be unequipped first.
+     *
+     * @param player the player
+     * @param type   the cosmetic type
+     * @param id     the cosmetic ID
+     * @return true if the cosmetic was equipped successfully
      */
     public abstract boolean equipCosmetic(Player player, CosmeticType type, int id);
 
     /**
-     * Desequipa un cosmético de un jugador.
-     * @param player Jugador
-     * @param type Tipo de cosmético
-     * @return true si se desequipó correctamente
+     * Unequips a cosmetic of the given type from a player.
+     *
+     * @param player the player
+     * @param type   the cosmetic type to unequip
+     * @return true if a cosmetic was unequipped
      */
     public abstract boolean unequipCosmetic(Player player, CosmeticType type);
 
     /**
-     * Desequipa todos los cosméticos de un jugador.
-     * @param player Jugador
+     * Removes all equipped cosmetics from a player.
+     *
+     * @param player the player
      */
     public abstract void clearCosmetics(Player player);
 
     /**
-     * Obtiene el ID del cosmético equipado por un jugador.
-     * @param player Jugador
-     * @param type Tipo de cosmético
-     * @return ID del cosmético o -1 si no tiene
+     * Gets the ID of the cosmetic currently equipped by a player for a given type.
+     *
+     * @param player the player
+     * @param type   the cosmetic type
+     * @return the cosmetic ID, or -1 if none is equipped
      */
     public abstract int getEquippedCosmetic(Player player, CosmeticType type);
 
     /**
-     * Da un cosmético a un jugador.
-     * @param player Jugador
-     * @param type Tipo de cosmético
-     * @param id ID del cosmético
-     * @return true si se otorgó correctamente
+     * Gives a cosmetic to a player. The cosmetic will be added to their collection
+     * and persisted in the database.
+     *
+     * @param player the player
+     * @param type   the cosmetic type
+     * @param id     the cosmetic ID
+     * @return true if the cosmetic was given successfully
      */
     public abstract boolean giveCosmetic(Player player, CosmeticType type, int id);
 
     /**
-     * Remueve un cosmético de un jugador.
-     * @param player Jugador
-     * @param type Tipo de cosmético
-     * @param id ID del cosmético
-     * @return true si se removió correctamente
+     * Removes a cosmetic from a player's collection.
+     *
+     * @param player the player
+     * @param type   the cosmetic type
+     * @param id     the cosmetic ID
+     * @return true if the cosmetic was removed successfully
      */
     public abstract boolean removeCosmetic(Player player, CosmeticType type, int id);
 
     /**
-     * Obtiene información de un cosmético.
-     * @param type Tipo de cosmético
-     * @param id ID del cosmético
-     * @return Optional con la data del cosmético
+     * Gets information about a specific cosmetic.
+     *
+     * @param type the cosmetic type
+     * @param id   the cosmetic ID
+     * @return Optional containing the cosmetic data, or empty if not found
      */
     public abstract Optional<CosmeticData> getCosmeticData(CosmeticType type, int id);
 
     /**
-     * Obtiene todos los cosméticos de un tipo.
-     * @param type Tipo de cosmético
-     * @return Lista de datos de cosméticos
+     * Gets all cosmetics of a given type.
+     *
+     * @param type the cosmetic type
+     * @return list of cosmetic data
      */
     public abstract List<CosmeticData> getCosmetics(CosmeticType type);
 
     /**
-     * Obtiene la cantidad de cosméticos que posee un jugador.
-     * @param player Jugador
-     * @param type Tipo de cosmético (null para total)
-     * @return Cantidad de cosméticos
+     * Counts how many cosmetics of a given type a player owns.
+     *
+     * @param player the player
+     * @param type   the cosmetic type
+     * @return number of owned cosmetics
      */
     public abstract int getCosmeticCount(Player player, CosmeticType type);
 
     /**
-     * Verdad si el plugin UCosmetics está completamente cargado.
-     * @return true si está listo
+     * Checks whether the UCosmetics plugin is fully loaded and ready.
+     *
+     * @return true if the plugin is loaded
      */
     public abstract boolean isLoaded();
 
     /**
-     * Obtiene la instancia del plugin UCosmetics.
-     * @return Plugin
+     * Gets the UCosmetics plugin instance.
+     *
+     * @return the plugin instance
      */
     public abstract Plugin getPlugin();
 }

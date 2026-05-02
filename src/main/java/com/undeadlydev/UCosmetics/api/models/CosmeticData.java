@@ -5,7 +5,7 @@ import com.undeadlydev.UCosmetics.api.CosmeticType;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Datos de un cosmético (solo lectura).
+ * Cosmetic data (read only).
  */
 public class CosmeticData {
 

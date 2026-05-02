@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Se llama cuando un jugador equipa un cosmético.
+ * It's called when a player equips a cosmetic item.
  */
 public class CosmeticEquipEvent extends PlayerEvent {
 

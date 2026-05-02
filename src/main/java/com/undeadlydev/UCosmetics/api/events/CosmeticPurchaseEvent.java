@@ -6,10 +6,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Se llama cuando un jugador compra un cosmético.
- * Cancelable.
- */
 public class CosmeticPurchaseEvent extends PlayerEvent {
 
     private static final HandlerList HANDLERS = new HandlerList();
