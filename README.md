@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.github.UndeadlyDev:UCosmeticsAPI:1.0.1'
+    compileOnly 'com.github.UndeadlyDev:UCosmeticsAPI:1.0.2'
 }
 ```
 
@@ -42,7 +42,7 @@ dependencies {
 <dependency>
     <groupId>com.github.UndeadlyDev</groupId>
     <artifactId>UCosmeticsAPI</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <scope>provided</scope>
 </dependency>
 ```
