@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Public API for UCosmetics. (1.0.1)
+ * Public API for UCosmetics. (1.0.2)
  * <p>
  * Use {@link #get()} to obtain the registered API instance.
  * </p>
  *
  * <pre>
- * Optional&lt;UCosmeticsAPI&gt; api = UCosmeticsAPI.get();
- * api.ifPresent(ucosmetics -&gt; {
+ * Optional;UCosmeticsAPI; api = UCosmeticsAPI.get();
+ * api.ifPresent(ucosmetics -; {
  *     ucosmetics.giveCosmetic(player, CosmeticType.HAT, 1);
  * });
  * </pre>
