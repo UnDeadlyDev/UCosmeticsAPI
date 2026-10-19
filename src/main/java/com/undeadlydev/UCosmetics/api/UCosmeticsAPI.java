@@ -3,10 +3,6 @@ package com.undeadlydev.UCosmetics.api;
 import com.undeadlydev.UCosmetics.api.models.CosmeticData;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -30,7 +26,7 @@ public abstract class UCosmeticsAPI {
   /** Resolve the active service each time, including after reloads. */
   public static Optional<UCosmeticsAPI> get() {
     RegisteredServiceProvider<UCosmeticsAPI> provider =
-        Bukkit.getServicesManager().getRegistration(UCosmeticsAPI.class);
+        org.bukkit.Bukkit.getServicesManager().getRegistration(UCosmeticsAPI.class);
     return provider == null || !provider.getPlugin().isEnabled()
         ? Optional.empty()
         : Optional.of(provider.getProvider());
@@ -46,9 +42,9 @@ public abstract class UCosmeticsAPI {
    * @param <T> result type
    * @return result or exceptional completion for offline/retired players
    */
-  public <T> CompletableFuture<T> onPlayer(
-      Player player, Function<UCosmeticsAPI, T> action) {
-    return CompletableFuture.failedFuture(
+  public <T> java.util.concurrent.CompletableFuture<T> onPlayer(
+      Player player, java.util.function.Function<UCosmeticsAPI, T> action) {
+    return java.util.concurrent.CompletableFuture.failedFuture(
         new UnsupportedOperationException("Upgrade UCosmetics"));
   }
 
@@ -69,21 +65,24 @@ public abstract class UCosmeticsAPI {
   /**
    * @return actual equip outcome, executed on the player scheduler
    */
-  public CompletableFuture<Boolean> equipCosmeticAsync(Player player, CosmeticType type, int id) {
+  public java.util.concurrent.CompletableFuture<Boolean> equipCosmeticAsync(
+      Player player, CosmeticType type, int id) {
     return onPlayer(player, api -> api.equipCosmetic(player, type, id));
   }
 
   /**
    * @return actual unequip outcome, executed on the player scheduler
    */
-  public CompletableFuture<Boolean> unequipCosmeticAsync(Player player, CosmeticType type) {
+  public java.util.concurrent.CompletableFuture<Boolean> unequipCosmeticAsync(
+      Player player, CosmeticType type) {
     return onPlayer(player, api -> api.unequipCosmetic(player, type));
   }
 
   /**
    * @return whether ownership was newly granted
    */
-  public CompletableFuture<Boolean> giveCosmeticAsync(Player player, CosmeticType type, int id) {
+  public java.util.concurrent.CompletableFuture<Boolean> giveCosmeticAsync(
+      Player player, CosmeticType type, int id) {
     return onPlayer(player, api -> api.giveCosmetic(player, type, id));
   }
 
