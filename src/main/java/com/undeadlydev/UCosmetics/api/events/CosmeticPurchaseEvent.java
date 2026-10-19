@@ -2,12 +2,11 @@ package com.undeadlydev.UCosmetics.api.events;
 
 import com.undeadlydev.UCosmetics.api.CosmeticType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
-public class CosmeticPurchaseEvent extends PlayerEvent implements Cancellable {
+public class CosmeticPurchaseEvent extends PlayerEvent implements org.bukkit.event.Cancellable {
 
   private static final HandlerList HANDLERS = new HandlerList();
   private final CosmeticType type;
