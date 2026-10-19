@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.github.UndeadlyDev.UCosmetics'
-version = '1.0.2'
+version = findProperty('apiVersion') ?: '1.1.0'
 
 java {
     toolchain {
@@ -16,17 +16,18 @@ java {
 
 repositories {
     mavenCentral()
-    maven { url = 'https://repo.papermc.io/repository/maven-public/' }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.21.11-R0.1-SNAPSHOT'
 }
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+            artifactId = 'UCosmeticsAPI'
             pom {
                 name = 'UCosmeticsAPI'
                 description = 'Public API UCosmetics'
